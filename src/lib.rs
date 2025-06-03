@@ -819,7 +819,9 @@ impl RoomState {
                     let sender_user_role = self.user_role(sender);
                     let target_user_role = self.user_role(target);
 
-                    // Do nothing if the role is already correct. This is required because a self-remove is applied twice: Once when submitted as a proposal and another time when the proposal is committed.
+                    // Do nothing if the role is already correct. This is required because a
+                    // self-remove is applied twice: Once when submitted as a proposal and another
+                    // time when the proposal is committed.
                     if target_user_role == *role {
                         continue;
                     }
@@ -837,7 +839,7 @@ impl RoomState {
                         if *role == RoleIndex::Outsider {
                             self.users.remove(&tls_serialize(target));
                         } else {
-                            self.users.insert(tls_serialize(target), role.clone());
+                            self.users.insert(tls_serialize(target), *role);
                         }
                     } else {
                         return Err(Error::NotCapable);
